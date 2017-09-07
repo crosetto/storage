@@ -20,7 +20,10 @@ struct storage_info_sol{
     static constexpr int size(){return layout_t::length;}
 
     template<int Coord>
-    constexpr int dim() const {return m_dims[Coord];}
+    constexpr int dim() const {
+		static_assert(Coord<layout_t::length);
+		return m_dims[Coord];
+	}
 
     template<typename ... Ints>
     constexpr int index(Ints ... idx) const {
